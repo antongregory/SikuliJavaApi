@@ -98,35 +98,7 @@ public class ScreenMapper {
 	}
 	
 	
-	public static void main(String args[]){
-		Screen screen=new Screen();
-		
-		System.out.println("sc "+screen.h);
-		ScreenMapper screenMapper=new ScreenMapper(screen.h,screen.w,500);
-		App.focus("Original.aoi");
-		 LinkedHashMap<Region,String> map=screenMapper.createRegion();
-		 ArrayList<Region> unmatched=new ArrayList<Region>();
-		 Set<Region> regionKey=map.keySet();
-		 App.focus("Untitled");
-		 for(Region region:regionKey){
-	            
-	            System.out.println("region: "+map.get(region));
-	            Pattern ps=new Pattern(map.get(region));
-	            if(getComparison(screen,ps)){
-	            	System.out.println("printing blue");
-	            	region.highlight(1,"BLUE");
-	            }
-	            else{
-	            	System.out.println("printing red");
-	            	region.highlight(1,"RED");
-	            }
-	        
-		 }
-	
-		
-		 
-		 
-	}
+
 	
 	public static boolean getComparison(Screen screen,Pattern ps){
 		Region reg=screen.exists(ps.exact());

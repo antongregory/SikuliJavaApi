@@ -20,14 +20,6 @@ public class RectangleRegion {
 		this.endPoint = endPoint;
 	}
 	
-
-	public void printStartingPoint(){
-		
-		System.out.println("Starting point is: "+"("+startingPoint[0]+","+startingPoint[1]+")");
-	}
-	public void printEndPoint(){
-		System.out.println("End point is : "+"("+endPoint[0]+","+endPoint[1]+")");
-	}
 	
 		
 }
