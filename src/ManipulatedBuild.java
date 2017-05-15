@@ -1,13 +1,18 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.concurrent.CountDownLatch;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class FileChooser extends JFrame{
+
+public class ManipulatedBuild extends JFrame{
 
 
     JButton openButton;
@@ -16,7 +21,7 @@ public class FileChooser extends JFrame{
 
      JLabel statusbar ;
      Container c ;
-   public FileChooser() {
+   public ManipulatedBuild() {
     super("Choose Jar File");
     
     setSize(350, 200);
@@ -25,11 +30,11 @@ public class FileChooser extends JFrame{
  c = getContentPane();
     c.setLayout(new FlowLayout());
     
-     openButton = new JButton("Open");
+     openButton = new JButton("Open Manipulated jar");
 
-     initButton=new JButton("Scan Screen");
+     initButton=new JButton("Compare Versions");
  statusbar = 
-                 new JLabel("Output of your selection will go here");
+                 new JLabel("Comparison output");
 
     // Create a file chooser that opens up as an Open dialog
     
@@ -50,10 +55,10 @@ public class FileChooser extends JFrame{
 	   openButton.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent ae) {
 		        JFileChooser chooser = new JFileChooser();
-		        System.out.println("clicked ");
+		   
 		        chooser.setMultiSelectionEnabled(false);
 		        chooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
-		        int option = chooser.showOpenDialog(FileChooser.this);
+		        int option = chooser.showOpenDialog(ManipulatedBuild.this);
 		     
 		        if (option == JFileChooser.APPROVE_OPTION) {
 		        	
@@ -104,7 +109,9 @@ public class FileChooser extends JFrame{
        {
           	System.out.println("from wait istener");
            latch.countDown();
+           
        }
+       
 
        void waitFor()
        {
@@ -119,15 +126,4 @@ public class FileChooser extends JFrame{
        }
    }
 
-
- 
-   
-   
-  public static void main(String args[]) throws InterruptedException {
-	  FileChooser sfc = new FileChooser();
-    sfc.setVisible(true);
-    //sfc.initialise(sfc);
-    Thread.sleep(2000);
-    System.out.println("sample");
-  }
 }

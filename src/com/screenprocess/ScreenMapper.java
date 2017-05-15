@@ -5,6 +5,7 @@ import com.rectangleregion.RectangleRegion;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import org.sikuli.script.*;
 public class ScreenMapper {
@@ -31,7 +32,8 @@ public class ScreenMapper {
 	public  LinkedHashMap<Region,String> createRegion(){
 		
 		Region region = null;
-		resDir="C:\\Users\\antongregory\\workspace\\SikuliMain\\res";
+		resDir=System.getProperty("user.dir")+"\\res";
+		System.out.println(""+resDir);
 		while(true){
 			if(start){
 				region=new Region(0, 0, max,max);
@@ -56,10 +58,10 @@ public class ScreenMapper {
 			lastRegion=region;
 			//region.highlight(2);
 			screenImage=screen.capture(region);
-			screenImage.getFile("C:\\Users\\antongregory\\workspace\\SikuliMain\\res");
 			
+			System.out.println("trying to save");
 			String url=screenImage.save(resDir);
-			
+			System.out.println("image save");
 			regionMap.put(region,url);
 			System.out.println("Region x and y: "+region.x+","+region.y);
 		}
