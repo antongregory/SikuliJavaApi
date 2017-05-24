@@ -26,7 +26,11 @@ public class Main {
 		static Screen screen;
 		
 	public static void main(String args[]) throws InterruptedException{
-
+		
+		SnipIt snip=new SnipIt();
+		System.out.println("created");
+		System.out.println("snipit "+snip.getBoundaries());
+		
 		FileChooser.Waiter waiter = new FileChooser.Waiter();
 		
 		fileChooser=new FileChooser();
@@ -47,6 +51,7 @@ public class Main {
 		   System.out.println("App opened");
 		   initPattern();
 		   ManipulatedBuild.Waiter mWaiter=new   ManipulatedBuild.Waiter();
+		   ManipulatedBuild.Waiter classWaiter=new   ManipulatedBuild.Waiter();
 		   ManipulatedBuild mBuild=new ManipulatedBuild();
 		   
 		   SwingUtilities.invokeLater(new Runnable()
@@ -57,6 +62,7 @@ public class Main {
 	            	mBuild.setVisible(true);
 	            	mBuild.initialise();
 	            	mBuild.setWaitingListener(mWaiter);
+	            	mBuild.getClassPath(classWaiter);
 	            	
 	            }
 	        });
@@ -64,32 +70,8 @@ public class Main {
 		   compareResult();
 
 		   
-		   
-//		Screen screen=new Screen();
-//		
-//		System.out.println("sc "+screen.h);
-//		ScreenMapper screenMapper=new ScreenMapper(screen.h,screen.w,500);
-//		
-//		openOriginalBuild(new String(""),null);
-		//App.focus("Original.aoi");
-		/* LinkedHashMap<Region,String> map=screenMapper.createRegion();
-		 ArrayList<Region> unmatched=new ArrayList<Region>();
-		 Set<Region> regionKey=map.keySet();
-		 App.focus("Untitled");
-		 for(Region region:regionKey){
-	            
-	            System.out.println("region: "+map.get(region));
-	            Pattern ps=new Pattern(map.get(region));
-	            if(ScreenMapper.getComparison(screen,ps)){
-	            	System.out.println("printing blue");
-	            	region.highlight(1,"BLUE");
-	            }
-	            else{
-	            	System.out.println("printing red");
-	            	region.highlight(1,"RED");
-	            }
-	        
-		 }*/
+
+
 	
 	}
 	

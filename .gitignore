@@ -1,3 +1,4 @@
 res/
 *.class
 /bin/
+/target/

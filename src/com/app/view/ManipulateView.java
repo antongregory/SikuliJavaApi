@@ -1,9 +1,10 @@
+package com.app.view;
+
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -11,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ManipulatedBuild extends JFrame {
+public class ManipulateView extends JFrame {
 
 	JButton openButton;
 	JButton initButton;
@@ -21,7 +22,7 @@ public class ManipulatedBuild extends JFrame {
 	JLabel statusbar;
 	Container c;
 
-	public ManipulatedBuild() {
+	public ManipulateView() {
 		super("Choose Jar File");
 
 		setSize(350, 200);
@@ -61,7 +62,7 @@ public class ManipulatedBuild extends JFrame {
 					System.out.println("clicked ");
 					chooser.setMultiSelectionEnabled(false);
 					chooser.setFileFilter(new FileNameExtensionFilter("*.java", "java"));
-					int option = chooser.showOpenDialog(ManipulatedBuild.this);
+					int option = chooser.showOpenDialog(ManipulateView.this);
 
 					if (option == JFileChooser.APPROVE_OPTION) {
 
@@ -69,7 +70,7 @@ public class ManipulatedBuild extends JFrame {
 
 						statusbar.setText("Setting things up");
 
-						Main.openOriginalBuild(sf.getAbsolutePath());
+					//	Main.openOriginalBuild(sf.getAbsolutePath());
 
 					} else {
 						statusbar.setText(" canceled.");
@@ -86,7 +87,7 @@ public class ManipulatedBuild extends JFrame {
 
 				chooser.setMultiSelectionEnabled(false);
 				chooser.setFileFilter(new FileNameExtensionFilter("*.jar", "jar"));
-				int option = chooser.showOpenDialog(ManipulatedBuild.this);
+				int option = chooser.showOpenDialog(ManipulateView.this);
 
 				if (option == JFileChooser.APPROVE_OPTION) {
 
@@ -94,7 +95,7 @@ public class ManipulatedBuild extends JFrame {
 
 					statusbar.setText("Setting things up");
 
-					Main.openOriginalBuild(sf.getAbsolutePath());
+					//Main.openOriginalBuild(sf.getAbsolutePath());
 
 				} else {
 					statusbar.setText(" canceled.");
@@ -111,34 +112,5 @@ public class ManipulatedBuild extends JFrame {
 		});
 
 	}
-
-	public void setWaitingListener(Waiter waiterlistener) {
-
-		initButton.addActionListener(waiterlistener);
-	}
-	public String getClassPath(Waiter waiterlistener){
-		
-		pickClass.addActionListener(waiterlistener);
-		return "yes oh yes";
-		
-	}
-	public static class Waiter implements ActionListener {
-		private final CountDownLatch latch = new CountDownLatch(1);
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("from wait istener");
-			latch.countDown();
-
-		}
-
-		void waitFor() {
-			try {
-				latch.await();
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-		}
-	}
-
+	
 }
